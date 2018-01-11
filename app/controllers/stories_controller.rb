@@ -8,4 +8,10 @@ class StoriesController < ApplicationController
       Story.new story
     end
   end
+
+  def show
+    story = JSON.parse open("https://node-hnapi.herokuapp.com/item/#{params[:id]}").read
+
+    @story = Story.new story
+  end
 end

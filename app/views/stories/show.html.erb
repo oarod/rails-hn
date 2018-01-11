@@ -1,0 +1,9 @@
+<div>
+  <%= @story.title %>
+  <em>(<%= @story.domain %>)</em>
+</div>
+<small>
+  <%= pluralize @story.points, 'point' %> by <%= @story.user %>
+  <%= @story.time_ago %> |
+  <%= pluralize @story.comments_count, 'comment' %>
+</small>

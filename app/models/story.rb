@@ -1,5 +1,5 @@
 class Story
   include ActiveModel::Model
 
-  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain
+  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments
 end

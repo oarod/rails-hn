@@ -6,6 +6,6 @@
   <small>
     <%= pluralize story.points, 'point' %> by <%= story.user %>
     <%= story.time_ago %> |
-    <%= pluralize story.comments_count, 'comment' %>
+    <%= link_to pluralize(story.comments_count, 'comment'), story_path(story.id) %>
   </small>
 </li>
