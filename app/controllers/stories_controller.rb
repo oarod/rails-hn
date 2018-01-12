@@ -2,7 +2,7 @@ require 'open-uri'
 
 class StoriesController < ApplicationController
   def index
-    @stories = Story.all
+    @stories = Story.all(params[:category] || 'news')
   end
 
   def show

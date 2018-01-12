@@ -3,8 +3,8 @@ class Story
 
   attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments, :hash
 
-  def self.all
-    stories = JSON.parse open('https://node-hnapi.herokuapp.com/news').read
+  def self.all(category)
+    stories = JSON.parse open("https://node-hnapi.herokuapp.com/#{category}").read
 
     stories.map do |story|
       Story.new story
