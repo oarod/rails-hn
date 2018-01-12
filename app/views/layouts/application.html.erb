@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HnRails</title>
+    <title>Hacker News</title>
     <%= csrf_meta_tags %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        margin: 33px;
+        font-family: verdana, arial, helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 18px;
+      }
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      p, ol, ul, td {
+        font-family: verdana, arial, helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      ul, ol {
+        list-style: none;
+      }
+
+      ol {
+        padding-left: 0;
+      }
+
+      ul {
+        padding-left: 1.34em;
+      }
+
+      li {
+        margin-top: 0.67em;
+        margin-bottom: 0.67em;
+      }
+
+      .gray {
+        color: #666;
+      }
+
+      pre {
+        background-color: #eee;
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      a {
+        color: #000;
+
+        &:visited {
+          color: #666;
+        }
+
+        &:hover {
+          color: #fff;
+          background-color: #000;
+        }
+      }
+    </style>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
   </head>
-
   <body>
     <%= yield %>
   </body>
