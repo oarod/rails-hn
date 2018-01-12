@@ -1,17 +1,17 @@
-class Story
+class Comment
   include ActiveModel::Model
 
-  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments
+  attr_accessor :id, :user, :time, :time_ago, :type, :content, :deleted, :dead, :comments, :comments_count, :level, :url
 
   def initialize(attributes)
     super attributes
 
-    build_comments
+    build_child_comments
   end
 
   private
 
-  def build_comments
+  def build_child_comments
     return unless comments
 
     self.comments = comments.map do |params|
