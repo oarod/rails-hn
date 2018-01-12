@@ -1,9 +1,9 @@
 <h1>Hacker News</h1>
-<%= link_to "Top", "#" %> | 
-<%= link_to "New", "#" %> | 
-<%= link_to "Ask", "#" %> | 
-<%= link_to "Show", "#" %> | 
+<%= link_to "Top", "#" %> |
+<%= link_to "New", "#" %> |
+<%= link_to "Ask", "#" %> |
+<%= link_to "Show", "#" %> |
 <%= link_to "Jobs", "#" %>
-<ol><%= render @stories %></ol>
+<ol><%= render @stories, cached: true %></ol>
 <%= link_to "Prev", "#" %> | 
-<%= link_to "Next", "#" %> 
+<%= link_to "Next", "#" %>
