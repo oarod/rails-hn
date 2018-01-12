@@ -15,7 +15,6 @@
         line-height: 18px;
       }
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
       p, ol, ul, td {
         font-family: verdana, arial, helvetica, sans-serif;
         font-size: 13px;
@@ -62,6 +61,7 @@
         }
       }
     </style>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
   </head>
   <body>
     <%= yield %>
