@@ -1,7 +1,7 @@
 class Story
   include ActiveModel::Model
 
-  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments
+  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments, :hash
 
   def self.all
     stories = JSON.parse open('https://node-hnapi.herokuapp.com/news').read
@@ -20,7 +20,13 @@ class Story
   def initialize(attributes)
     super attributes
 
+    self.hash = JSON.generate attributes
+
     build_comments
+  end
+
+  def cache_key
+    "stories/#{hash}"
   end
 
   private
