@@ -24,6 +24,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
-gem 'heroku-deflater', '~> 0.6.3', group: :production
+gem 'heroku-deflater', git: 'https://github.com/romanbsd/heroku-deflater.git', group: :production
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
