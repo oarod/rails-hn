@@ -11,5 +11,4 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require_tree .
 //= require serviceworker-companion

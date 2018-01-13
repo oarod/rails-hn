@@ -18,7 +18,6 @@ function onInstall(event) {
 }
 
 function onActivate(event) {
-  console.log('[Serviceworker]', 'Activating!', event);
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
