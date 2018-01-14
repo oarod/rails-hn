@@ -1,7 +1,9 @@
 <li>
   <div>
     <%= link_to story.title, story.url %>
-    <small><em class="gray">(<%= story.domain %>)</em></small>
+    <% if story.domain %>
+      <small><em class="gray">(<%= story.domain %>)</em></small>
+    <% end %>
   </div>
   <small>
     <%= pluralize story.points, 'point' %> by <%= story.user %>

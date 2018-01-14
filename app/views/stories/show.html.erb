@@ -1,6 +1,8 @@
 <div>
   <%= link_to @story.title, @story.url %>
-  <em>(<%= @story.domain %>)</em>
+  <% if @story.domain %>
+    <em>(<%= @story.domain %>)</em>
+  <% end %>
 </div>
 <small>
   <%= pluralize @story.points, 'point' %> by <%= @story.user %>
