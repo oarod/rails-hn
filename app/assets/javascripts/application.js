@@ -15,8 +15,3 @@
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/serviceworker.js', { scope: './' });
 }
-
-if (location.protocol === 'http:' && location.host !== 'localhost:3000') {
-  location.href =
-    'https:' + window.location.href.substring(window.location.protocol.length);
-}
