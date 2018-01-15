@@ -1,13 +1,12 @@
 <li>
   <div>
     <%= link_to story.title, story.url %>
-    <% if story.domain %>
-      <small><em class="gray">(<%= story.domain %>)</em></small>
-    <% end %>
   </div>
-  <small>
-    <%= pluralize story.points, 'point' %> by <%= story.user %>
-    <%= story.time_ago %> |
-    <%= link_to pluralize(story.comments_count, 'comment'), story_path(story.id) %>
+  <small class="gray">
+    <%= pluralize story.points, 'point' %> -
+    <% if story.user %>
+      <%= story.user %> -
+    <% end %>
+    <%= link_to pluralize(story.comments_count, 'comment'), story_path(story.id), class: 'gray' %>
   </small>
 </li>

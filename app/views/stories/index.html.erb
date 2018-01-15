@@ -1,12 +1,4 @@
-<h1>Hacker News</h1>
-
-<%= link_to "Top", news_path %> |
-<%= link_to "New", newest_path %> |
-<%= link_to "Ask", ask_path %> |
-<%= link_to "Show", show_path %> |
-<%= link_to "Jobs", jobs_path %>
-
 <ol><%= render @stories, cached: true %></ol>
 
-<%= link_to_unless first_page?, "Prev", previous_page_path %> |
+<span class="gray"><%= link_to_unless first_page?, "Prev", previous_page_path %></span> |
 <%= link_to "Next", next_page_path %>
