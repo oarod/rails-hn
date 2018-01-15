@@ -70,6 +70,7 @@
     </style>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
     <link rel="manifest" href="/manifest.json" />
+    <%= canonical_tag -%>
     <meta name="apple-mobile-web-app-capable" content="yes"></head>
   <body>
     <%= yield %>
