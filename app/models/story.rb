@@ -1,20 +1,31 @@
 class Story
   include ActiveModel::Model
 
+  API_BASE = 'https://node-hnapi.herokuapp.com'
+  CACHE_EXPIRY = 5.minutes
+
   attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments, :hash
 
   def self.all(category, page)
-    stories = JSON.parse open("https://node-hnapi.herokuapp.com/#{category}?page=#{page}").read
+    stories_url = "#{API_BASE}/#{category}?page=#{page}"
 
-    stories.map do |story|
-      Story.new story
+    Rails.cache.fetch(stories_url, expires_in: CACHE_EXPIRY) do
+      stories = JSON.parse open(stories_url).read
+
+      stories.map do |story|
+        Story.new story
+      end
     end
   end
 
   def self.find(id)
-    story = JSON.parse open("https://node-hnapi.herokuapp.com/item/#{id}").read
+    story_url = "#{API_BASE}/item/#{id}"
 
-    Story.new story
+    Rails.cache.fetch(story_url, expires_in: CACHE_EXPIRY) do
+      story = JSON.parse open(story_url).read
+
+      Story.new story
+    end
   end
 
   def initialize(attributes)
