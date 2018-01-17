@@ -16,23 +16,14 @@ if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/serviceworker.js', { scope: './' });
 }
 
-document.addEventListener('turbolinks:click', function() {
-  document.querySelector('.content').classList.remove('fadeInRight');
-  document.querySelector('.content').classList.add('animated', 'fadeOutLeft');
-  document.removeEventListener(
-    'webkitAnimationEnd oanimationend msAnimationEnd animationend',
-    removeAnimatedClass
-  );
-});
+document.addEventListener('turbolinks:click', onHistoryChange);
+window.addEventListener('popstate', onHistoryChange);
 
 document.addEventListener('turbolinks:load', function(event) {
-  document.querySelector('.content').classList.add('animated', 'fadeInRight');
-  document.addEventListener(
-    'webkitAnimationEnd oanimationend msAnimationEnd animationend',
-    removeAnimatedClass
-  );
+  document.querySelector('#content').classList.add('fadeInRight');
 });
 
-function removeAnimatedClass() {
-  document.querySelector('.content').classList.remove('animated');
+function onHistoryChange() {
+  document.querySelector('#content').classList.remove('fadeInRight');
+  document.querySelector('#content').classList.add('fadeOutLeft');
 }
