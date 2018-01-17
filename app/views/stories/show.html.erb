@@ -2,9 +2,11 @@
   <%= link_to @story.title, @story.url %>
 </div>
 <small class="gray">
-  <%= pluralize @story.points, 'point' %> - <%= @story.user %>
-  <%= @story.time_ago %> -
-  <%= pluralize @story.comments_count, 'comment' %>
+  <%= pluralize @story.points, 'point' %> -
+  <% if @story.user %>
+    <%= @story.user %> -
+  <% end %>
+  <%= link_to pluralize(@story.comments_count, 'comment'), story_path(@story.id), class: 'gray' %>
 </small>
 
 <ul><%= render @story.comments, cached: true %></ul>
