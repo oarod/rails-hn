@@ -7,11 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A Hacker News PWA made with Ruby on Rails.">
     <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
+    <link rel="manifest" href="/manifest.json" />
     <style>
       body {
-        background-color: #fcfcfc;
         color: #333;
-        margin: 20px;
+        padding: 3.34em 1em 0 1em;
+        margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         font-size: 16px;
         line-height: 22px;
@@ -54,7 +58,7 @@
         color: #333;
 
         &:visited {
-          color: #666;
+          color1 #777;
         }
 
         &:hover {
@@ -73,7 +77,7 @@
 
       .animated {
         animation-timing-function: cubic-bezier(.55, 0, .1, 1);
-        animation-duration: 125ms;
+        animation-duration: 150ms;
         animation-fill-mode: both;
       }
 
@@ -84,7 +88,7 @@
 
         to {
           opacity: 0;
-          transform: translate3d(-15px, 0, 0);
+          transform: translate3d(-1em, 0, 0);
         }
       }
 
@@ -95,7 +99,7 @@
       @keyframes fadeInRight {
         from {
           opacity: 0;
-          transform: translate3d(15px, 0, 0);
+          transform: translate3d(1em, 0, 0);
         }
 
         to {
@@ -109,21 +113,67 @@
       }
 
       .turbolinks-progress-bar {
-        visibility: hidden;
+        top: calc(3.34em - 1px);
+        height: 2px;
+        background-color: #777;
+        width: 100%;
+      }
+
+      .navbar-brand {
+        font-family: georgia;
+        display: inline-block;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 0 1em;
+        width: calc(100% - 2em);
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        z-index: 2;
+      }
+
+      .navbar-nav {
+        display: inline-block;
+        float: right;
+        width: auto;
+        margin: 1em 0;
+      }
+
+      h3 {
+        font-size: 1em;
+      }
+
+      .pl-0 {
+        padding-left: 0;
+      }
+
+      #content {
+        animation-timing-function: cubic-bezier(.55, 0, .1, 1);
+        animation-duration: 150ms;
+        animation-fill-mode: both;
+      }
+
+      .active {
+        pointer-events: none;
+        text-decoration: none;
       }
     </style>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="apple-mobile-web-app-capable" content="yes"></head>
-    <meta name="turbolinks-cache-control" content="no-cache">
+  </head>
   <body>
-    <h2>Hacker News</h2>
-    <%= link_to "Top", news_path %> |
-    <%= link_to "New", newest_path %> |
-    <%= link_to "Ask", ask_path %> |
-    <%= link_to "Show", show_path %> |
-    <%= link_to "Jobs", jobs_path %>
-    <div class="content">
+    <nav class="navbar">
+      <h3 class="navbar-brand">HN</h3>
+      <div class="navbar-nav">
+        <%= active_link_to "Top", news_path %> |
+        <%= active_link_to "New", newest_path %> |
+        <%= active_link_to "Ask", ask_path %> |
+        <%= active_link_to "Show", show_path %> |
+        <%= active_link_to "Jobs", jobs_path %>
+      </div>
+    </nav>
+    <div id="content">
       <%= yield %>
     </div>
   </body>

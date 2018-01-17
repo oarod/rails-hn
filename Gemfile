@@ -12,6 +12,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'serviceworker-rails', '~> 0.5.5'
+gem 'active_link_to', '~> 1.0', '>= 1.0.5'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

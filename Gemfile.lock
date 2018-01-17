@@ -24,6 +24,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (5.1.4)
       activesupport (= 5.1.4)
       globalid (>= 0.3.6)
@@ -38,6 +41,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     bindex (0.5.0)
     builder (3.2.3)
@@ -79,6 +84,7 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     pg (0.21.0)
+    public_suffix (3.0.1)
     puma (3.11.0)
     rack (2.0.3)
     rack-test (0.8.2)
@@ -176,6 +182,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to (~> 1.0, >= 1.0.5)
   byebug
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)

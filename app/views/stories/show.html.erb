@@ -9,4 +9,4 @@
   <%= pluralize @story.comments_count, 'comment' %>
 </small>
 
-<ul><%= render @story.comments, cached: true %></ul>
+<ul class="pl-0"><%= render @story.comments, cached: true %></ul>
