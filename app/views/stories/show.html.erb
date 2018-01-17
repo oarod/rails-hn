@@ -6,7 +6,7 @@
   <% if @story.user %>
     <%= @story.user %> -
   <% end %>
-  <%= link_to pluralize(@story.comments_count, 'comment'), story_path(@story.id), class: 'gray' %>
+  <%= pluralize @story.comments_count, 'comment' %>
 </small>
 
 <ul><%= render @story.comments, cached: true %></ul>
