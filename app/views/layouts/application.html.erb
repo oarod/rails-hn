@@ -70,10 +70,52 @@
       .mt-1 {
         margin-top: 1.34em;
       }
+
+      .animated {
+        animation-timing-function: cubic-bezier(.55, 0, .1, 1);
+        animation-duration: 125ms;
+        animation-fill-mode: both;
+      }
+
+      @keyframes fadeOutLeft {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+          transform: translate3d(-15px, 0, 0);
+        }
+      }
+
+      .fadeOutLeft {
+        animation-name: fadeOutLeft;
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translate3d(15px, 0, 0);
+        }
+
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .fadeInRight {
+        animation-name: fadeInRight;
+      }
+
+      .turbolinks-progress-bar {
+        visibility: hidden;
+      }
     </style>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: true %>
     <link rel="manifest" href="/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes"></head>
+    <meta name="turbolinks-cache-control" content="no-cache">
   <body>
     <h2>Hacker News</h2>
     <%= link_to "Top", news_path %> |
@@ -81,6 +123,8 @@
     <%= link_to "Ask", ask_path %> |
     <%= link_to "Show", show_path %> |
     <%= link_to "Jobs", jobs_path %>
-    <%= yield %>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
