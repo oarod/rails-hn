@@ -1,12 +1,16 @@
 <li>
   <div>
     <%= link_to story.title, story.url %>
-  </div>
-  <small class="gray">
-    <%= pluralize story.points, 'point' %> -
-    <% if story.user %>
-      <%= story.user %> -
+    <% if story.domain %>
+      <small><em class="gray">(<%= story.domain %>)</em></small>
     <% end %>
-    <%= link_to pluralize(story.comments_count, 'comment'), story_path(story.id), class: 'gray' %>
-  </small>
+  </div>
+
+  <% unless story.type == 'job' %>
+    <small class="gray">
+      <%= pluralize story.points, 'point' %> -
+      <%= story.user %> -
+      <%= link_to pluralize(story.comments_count, 'comment'), story_path(story.id), class: 'gray' %>
+    </small>
+  <% end %>
 </li>
