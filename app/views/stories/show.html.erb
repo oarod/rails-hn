@@ -1,16 +1,16 @@
 <div class="mt-1">
   <%= link_to @story.title, @story.url %>
-  <% if @story.domain %>
-    <small><em class="gray">(<%= @story.domain %>)</em></small>
+  <% if @story.url %>
+    <small><em class="gray">(<%= domain(@story.url) %>)</em></small>
   <% end %>
 </div>
 
-<% unless @story.type == 'job' %>
-  <small class="gray">
-    <%= pluralize @story.points, 'point' %> -
-    <%= @story.user %> -
-    <%= pluralize @story.comments_count, 'comment' %>
-  </small>
-<% end %>
+<small class="gray">
+  <%= pluralize @story.score, 'point' %> -
+  <%= @story.by %>
+  <% if @story.descendants %>
+    - <%= pluralize(@story.descendants, 'comment') %>
+  <% end %>
+</small>
 
 <ul class="pl-0"><%= render @story.comments, cached: true %></ul>

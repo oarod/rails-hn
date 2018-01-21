@@ -1,12 +1,6 @@
-class Comment
-  include ActiveModel::Model
-
-  attr_accessor :id, :user, :time, :time_ago, :type, :content, :deleted, :dead, :comments, :comments_count, :level, :url, :hash
-
-  def initialize(attributes)
-    super attributes
-
-    self.hash = JSON.generate attributes
+class Comment < Item
+  def initialize(id)
+    super id
 
     build_child_comments
   end
@@ -18,10 +12,10 @@ class Comment
   private
 
   def build_child_comments
-    return unless comments
+    self.kids ||= []
 
-    self.comments = comments.map do |params|
-      Comment.new params
+    self.comments = kids.map do |id|
+      Comment.new id
     end
   end
 end

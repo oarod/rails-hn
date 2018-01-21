@@ -1,5 +1,5 @@
 <li>
-  <small class="gray"><%= comment.user %> <%= comment.time_ago %></small>
-  <p><%= sanitize comment.content %></p>
+  <small class="gray"><%= comment.by %></small>
+  <p><%= sanitize comment.text %></p>
   <ul><%= render comment.comments, cached: true %></ul>
 </li>

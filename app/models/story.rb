@@ -1,39 +1,48 @@
-class Story
-  include ActiveModel::Model
-
-  API_BASE = 'https://node-hnapi.herokuapp.com'
+class Story < Item
+  PER_PAGE = 10
   CACHE_EXPIRY = 5.minutes
 
-  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments, :hash
-
   def self.all(category, page)
-    stories_url = "#{API_BASE}/#{category}?page=#{page}"
+    url = "#{API_BASE}/#{get_category(category)}.json"
 
-    Rails.cache.fetch(stories_url, expires_in: CACHE_EXPIRY) do
-      stories = JSON.parse open(stories_url).read
-
-      stories.map do |story|
-        Story.new story
+    story_ids =
+      Rails.cache.fetch(url, expires_in: CACHE_EXPIRY) do
+        JSON.parse open(url).read
       end
+
+    page_min = PER_PAGE * (page.to_i - 1)
+    page_max = PER_PAGE * page.to_i - 1
+
+    story_ids[page_min..page_max].map do |id|
+      Story.new id, false
     end
   end
 
   def self.find(id)
-    story_url = "#{API_BASE}/item/#{id}"
-
-    Rails.cache.fetch(story_url, expires_in: CACHE_EXPIRY) do
-      story = JSON.parse open(story_url).read
-
-      Story.new story
-    end
+    Story.new id
   end
 
-  def initialize(attributes)
-    super attributes
+  def self.get_category(category)
+    case category
+      when 'news'
+        'topstories'
+      when 'newest'
+        'newstories'
+      when 'show'
+        'showstories'
+      when 'ask'
+        'askstories'
+      when 'jobs'
+        'jobstories'
+      else
+        'topstories'
+    end
+end
 
-    self.hash = JSON.generate attributes
+  def initialize(id, comments = true)
+    super id
 
-    build_comments
+    build_comments if comments
   end
 
   def cache_key
@@ -43,10 +52,10 @@ class Story
   private
 
   def build_comments
-    return unless comments
+    self.kids ||= []
 
-    self.comments = comments.map do |params|
-      Comment.new params
+    self.comments = kids.map do |id|
+      Comment.new id
     end
   end
 end

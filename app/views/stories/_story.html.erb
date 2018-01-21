@@ -1,16 +1,16 @@
 <li>
   <div>
     <%= link_to story.title, story.url %>
-    <% if story.domain %>
-      <small><em class="gray">(<%= story.domain %>)</em></small>
+    <% if story.url %>
+      <small><em class="gray">(<%= domain(story.url) %>)</em></small>
     <% end %>
   </div>
 
-  <% unless story.type == 'job' %>
-    <small class="gray">
-      <%= pluralize story.points, 'point' %> -
-      <%= story.user %> -
-      <%= link_to pluralize(story.comments_count, 'comment'), story_path(story.id), class: 'gray' %>
-    </small>
-  <% end %>
+  <small class="gray">
+    <%= pluralize story.score, 'point' %> -
+    <%= story.by %>
+    <% if story.descendants %>
+      - <%= link_to pluralize(story.descendants, 'comment'), story_path(story.id), class: 'gray' %>
+    <% end %>
+  </small>
 </li>
