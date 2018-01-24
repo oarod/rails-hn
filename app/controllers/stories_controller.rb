@@ -2,10 +2,16 @@ require 'open-uri'
 
 class StoriesController < ApplicationController
   def index
-    @stories = Story.all(params[:category] || 'news', params[:page] || 1)
+    @stories = HackerNewsAPI.new(story_params).stories
   end
 
   def show
-    @story = Story.find(params[:id])
+    @story = HackerNewsAPI.new(story_params).story
+  end
+
+  private
+
+  def story_params
+    params.permit :category, :page, :id
   end
 end
