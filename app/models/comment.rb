@@ -1,27 +1,15 @@
-class Comment
-  include ActiveModel::Model
-
-  attr_accessor :id, :user, :time, :time_ago, :type, :content, :deleted, :dead, :comments, :comments_count, :level, :url, :hash
-
+class Comment < Item
   def initialize(attributes)
     super attributes
 
-    self.hash = JSON.generate attributes
+    return unless comments
 
-    build_child_comments
+    self.comments = comments.map do |comment|
+      Comment.new comment
+    end
   end
 
   def cache_key
     "comments/#{hash}"
-  end
-
-  private
-
-  def build_child_comments
-    return unless comments
-
-    self.comments = comments.map do |params|
-      Comment.new params
-    end
   end
 end

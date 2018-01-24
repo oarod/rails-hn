@@ -1,16 +1,12 @@
-class Story
-  include ActiveModel::Model
-
+class Story < Item
   API_BASE = 'https://node-hnapi.herokuapp.com'
   CACHE_EXPIRY = 5.minutes
 
-  attr_accessor :id,:title, :points, :user, :time, :time_ago, :comments_count, :type, :url, :domain, :content, :comments, :hash
-
   def self.all(category, page)
-    stories_url = "#{API_BASE}/#{category}?page=#{page}"
+    url = "#{API_BASE}/#{category}?page=#{page}"
 
-    Rails.cache.fetch(stories_url, expires_in: CACHE_EXPIRY) do
-      stories = JSON.parse open(stories_url).read
+    Rails.cache.fetch(url, expires_in: CACHE_EXPIRY) do
+      stories = JSON.parse open(url).read
 
       stories.map do |story|
         Story.new story
@@ -19,10 +15,10 @@ class Story
   end
 
   def self.find(id)
-    story_url = "#{API_BASE}/item/#{id}"
+    url = "#{API_BASE}/item/#{id}"
 
-    Rails.cache.fetch(story_url, expires_in: CACHE_EXPIRY) do
-      story = JSON.parse open(story_url).read
+    Rails.cache.fetch(url, expires_in: CACHE_EXPIRY) do
+      story = JSON.parse open(url).read
 
       Story.new story
     end
@@ -31,22 +27,14 @@ class Story
   def initialize(attributes)
     super attributes
 
-    self.hash = JSON.generate attributes
+    return unless comments
 
-    build_comments
+    self.comments = comments.map do |comment|
+      Comment.new comment
+    end
   end
 
   def cache_key
     "stories/#{hash}"
-  end
-
-  private
-
-  def build_comments
-    return unless comments
-
-    self.comments = comments.map do |params|
-      Comment.new params
-    end
   end
 end
